@@ -3,7 +3,7 @@
 ## Descripción 💻
 Comparación de técnicas de extracción de características.
 * SIFT
-* SURF
+* ~~SURF~~ 😿
 * FAST
 * BRIEF
 * ORB
@@ -13,4 +13,4 @@ Comparación de técnicas de extracción de características.
  * OpenCV
 
 ## Resultado 🎉
-![Alt text](res/resultado1.png?raw=true "Resultado ORB")
+![Resultado ORB](out/resultado1.png?raw=true "Resultado ORB")
