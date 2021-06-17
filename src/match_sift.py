@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-img1 = cv2.imread("../img/picadef1.png")
-img2 = cv2.imread("../img/picadef4.png")
+img1 = cv2.imread("img/picadef1.png")
+img2 = cv2.imread("img/picadef5.png")
 
 #SIFT Detector
 sift = cv2.SIFT_create()
@@ -14,9 +14,15 @@ bf = cv2.BFMatcher()
 matches = bf.knnMatch(des1,des2,k=2)
 
 good = []
+#0.48 para figura inclinada
+#0.45 girada en 180°
+#0.12
 for m,n in matches:
-    if m.distance < 0.32*n.distance:
+    if m.distance < 0.12*n.distance:
         good.append([m])
+
+print(len(good))
+
 
 res = cv2.drawMatchesKnn(img1,kp1,img2,kp2,good,None,flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 cv2.imshow("Detector SIFT",res)

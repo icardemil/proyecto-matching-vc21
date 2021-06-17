@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt 
 
 img1 = cv2.imread('../img/picadef1.png')
-img2 = cv2.imread('../img/picadef4.png')
+img2 = cv2.imread('../img/picadef3.png')
 
 #FAST Detector
 fast = cv2.FastFeatureDetector_create()
