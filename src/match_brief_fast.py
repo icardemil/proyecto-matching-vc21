@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 img1 = cv2.imread('img/picadef1.png')
-img2 = cv2.imread('img/picadef5.png')
+img2 = cv2.imread('img/picadef3.png')
 
 #Utilizando FAST para obtener los KP
 fast = cv2.FastFeatureDetector_create()
