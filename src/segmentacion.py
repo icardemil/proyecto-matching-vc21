@@ -1,27 +1,45 @@
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 
-imagen_ori = cv2.imread("img/picadef1.png")
-imagen_rgb = cv2.cvtColor(imagen_ori,cv2.COLOR_BGR2RGB)
+# Create data (three different 'clusters' of points (it should be of np.float32 data type):
+data = np.float32(np.vstack(
+    (np.random.randint(0, 40, (50, 2)), np.random.randint(30, 70, (50, 2)))))
+#print(np.random.randint(0, 40, (50, 2)))
+print(data)
+# Define the algorithm termination criteria (the maximum number of iterations and/or the desired accuracy):
+# In this case the maximum number of iterations is set to 20 and epsilon = 1.0
+criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 20, 1.0)
 
-vector_imagen = imagen_rgb.reshape((-1,3))
+# Apply kmeans algorithm
+# K = 3, which is the number of clusters to split the set by
+# attempts = 10, which specifies the number of times the algorithm is executed using different initial labellings (the
+# algorithm returns the labels that yield the best compactness)
+# Flag cv2.KMEANS_RANDOM_CENTERS selects random initial centers in each attempt. You can also use cv2.KMEANS_PP_CENTERS
+#print(data)
+ret, label, center = cv2.kmeans(data, 2, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
 
-vector_imagen = np.float32(vector_imagen)
+# Now separate the data using label output (stores the cluster indices for every sample)
+# Therefore, we split the data to different clusters depending on their labels:
+A = data[label.ravel() == 0]
+B = data[label.ravel() == 1]
 
-criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+# Create the dimensions of the figure and set title:
+fig = plt.figure(figsize=(12, 6))
+plt.suptitle("K-means clustering algorithm", fontsize=14, fontweight='bold')
+fig.patch.set_facecolor('silver')
 
-K = 3
-attempts = 10
-ret,label,center = cv2.kmeans(vector_imagen,K,None,criteria,attempts,cv2.KMEANS_PP_CENTERS)
+# Plot the 'original' data:
+ax = plt.subplot(1, 2, 1)
+plt.scatter(data[:, 0], data[:, 1], c='c')
+plt.title("data")
 
-res = center[label.flatten()]
-result_image = res.reshape((imagen_rgb.shape))
+# Plot the 'clustered' data and the centroids
+ax = plt.subplot(1, 2, 2)
+plt.scatter(A[:, 0], A[:, 1], c='b')
+plt.scatter(B[:, 0], B[:, 1], c='g')
+plt.scatter(center[:, 0], center[:, 1], s=100, c='m', marker='s')
+plt.title("clustered data and centroids (K = 2)")
 
-figure_size = 15
-plt.figure(figsize=(figure_size,figure_size))
-plt.subplot(1,2,1),plt.imshow(imagen_rgb)
-plt.title('Original Image'), plt.xticks([]), plt.yticks([])
-plt.subplot(1,2,2),plt.imshow(result_image)
-plt.title('Segmented Image when K = %i' % K), plt.xticks([]), plt.yticks([])
+# Show the Figure:
 plt.show()
