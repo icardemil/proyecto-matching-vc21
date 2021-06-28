@@ -18,7 +18,6 @@ matches = bf.match(des1,des2)
         print(m.distance)
 """
 matches = sorted(matches, key = lambda x:x.distance)
-print(len(matches))
 result = cv2.drawMatches(img1, kp1, img2, kp2, matches[:30], None, flags=2)
 
 cv2.imshow("Detector ORB",result)
