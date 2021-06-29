@@ -6,18 +6,18 @@ import math
 # Recibe dos puntos (P,Q) y los centroides de cada uno para calcular la distancia
 # y realizar la comparación para filtrar la lista de puntos con los que se realizará
 # el matching.
-def validarPuntos(p,q,c_1,c_2):
+def validarPuntos(p,q,c_1,c_2,umbral):
     p_x,p_y,p_i = p
     q_x,q_y,q_i = q
     c_x_p,c_y_p,c_i_p = c_1[0]
     c_x_q,c_y_q,c_i_q = c_2[0]
-    if (math.dist([p_x,p_y],[c_x_p,c_y_p]) - math.dist([q_x,q_y],[c_x_q,c_y_q])) < 15:
+    if abs(math.dist([p_x,p_y],[c_x_p,c_y_p]) - math.dist([q_x,q_y],[c_x_q,c_y_q])) < umbral:
         return True
     else:
         return False
 
 img1 = cv2.imread("img/picadef1.png")
-img2 = cv2.imread("img/picadef4.png")
+img2 = cv2.imread("img/picadef3.png")
 
 #ORB Detector
 orb = cv2.ORB_create()
@@ -55,7 +55,7 @@ ret_2, label_2, center_2 = cv2.kmeans(list_kp2, 1, None, criteria, 10, cv2.KMEAN
 #Calcular las distancia
 list_validos = []
 for i in range(len(list_kp1)):
-    if validarPuntos(list_kp1[i],list_kp2[i],center_1,center_2):
+    if validarPuntos(list_kp1[i],list_kp2[i],center_1,center_2,10):
         list_validos.append(matches[i])
     
 print(len(matches))
