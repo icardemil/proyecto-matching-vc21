@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 img1 = cv2.imread("img/picadef1.png")
-img2 = cv2.imread("img/picadef3.png")
+img2 = cv2.imread("img/picadef4.png")
 
 #ORB Detector
 orb = cv2.ORB_create()
@@ -18,7 +18,7 @@ matches = bf.match(des1,des2)
         print(m.distance)
 """
 matches = sorted(matches, key = lambda x:x.distance)
-result = cv2.drawMatches(img1, kp1, img2, kp2, matches[:30], None, flags=2)
+result = cv2.drawMatches(img1, kp1, img2, kp2, matches, None, flags=2)
 
 cv2.imshow("Detector ORB",result)
 cv2.waitKey(0)
