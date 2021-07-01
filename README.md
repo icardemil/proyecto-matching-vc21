@@ -9,7 +9,7 @@ Comparación de técnicas de extracción de características.
 * ORB
 
 ## Requisitos ✔️
- Para ejecutar el script se necesitan la siguiente librería:
+ Para ejecutar el script se necesita la siguiente librería:
  * OpenCV
 
 ## Resultado 🎉
