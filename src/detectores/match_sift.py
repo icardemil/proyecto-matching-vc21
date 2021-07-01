@@ -16,7 +16,7 @@ matches = bf.knnMatch(des1,des2,k=2)
 good = []
 #0.48 para figura inclinada
 #0.45 girada en 180°
-#0.12
+#0.12 ampliada
 for m,n in matches:
     if m.distance < 0.12*n.distance:
         good.append([m])
