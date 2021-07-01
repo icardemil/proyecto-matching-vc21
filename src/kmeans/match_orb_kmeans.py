@@ -17,7 +17,7 @@ def validarPuntos(p,q,c_1,c_2,umbral):
         return False
 
 img1 = cv2.imread("img/picadef1.png")
-img2 = cv2.imread("img/picadef3.png")
+img2 = cv2.imread("img/picadef4.png")
 
 #ORB Detector
 orb = cv2.ORB_create()
@@ -63,6 +63,6 @@ print(len(list_validos))
 
 result = cv2.drawMatches(img1, kp1, img2, kp2, list_validos, None, flags=2)
 
-cv2.imshow("Detector BRIEF & FAST + KMeans",result)
+cv2.imshow("Detector ORB + KMeans",result)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

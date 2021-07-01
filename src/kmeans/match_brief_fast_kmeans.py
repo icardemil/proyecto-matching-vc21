@@ -69,6 +69,6 @@ print(len(list_validos))
 
 result = cv2.drawMatches(img1, kp1, img2, kp2, list_validos, None, flags=2)
 
-cv2.imshow("Detector ORB + KMeans",result)
+cv2.imshow("Detector BRIEF & FAST + KMeans",result)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
